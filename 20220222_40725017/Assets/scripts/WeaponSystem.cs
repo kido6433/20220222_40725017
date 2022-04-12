@@ -31,7 +31,9 @@ namespace KIDO
             //print("經過的時間：" + timer);
             if (timer >= dataWeapon.interval)
             {
-                print("生成武器");
+                Vector3 pos = transform.position + dataWeapon.v3SpawnPoint[0];
+               // print("生成武器");
+                Instantiate(dataWeapon.goWeapon, pos, Quaternion.identity);
                 timer = 0;
             }
         }
