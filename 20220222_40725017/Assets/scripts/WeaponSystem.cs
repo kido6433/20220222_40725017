@@ -20,6 +20,13 @@ namespace KIDO
                 Gizmos.DrawSphere(transform.position + dataWeapon.v3SpawnPoint[i], 0.1f);
             }
         }
+
+        public void Start()
+        {
+            Physics2D.IgnoreLayerCollision(3, 6);
+            Physics2D.IgnoreLayerCollision(6, 6);
+            Physics2D.IgnoreLayerCollision(6, 7);
+        }
         private void Update()
         {
             SpawnWeapon();
@@ -31,9 +38,12 @@ namespace KIDO
             //print("經過的時間：" + timer);
             if (timer >= dataWeapon.interval)
             {
-                Vector3 pos = transform.position + dataWeapon.v3SpawnPoint[0];
+               int random =  Random.Range(0, dataWeapon.v3SpawnPoint.Length);
+                Vector3 pos = transform.position + dataWeapon.v3SpawnPoint[random];
                // print("生成武器");
-                Instantiate(dataWeapon.goWeapon, pos, Quaternion.identity);
+                GameObject tamp =  Instantiate(dataWeapon.goWeapon, pos, Quaternion.identity);
+
+                tamp.GetComponent<Rigidbody2D>().AddForce(dataWeapon.v3Directing * dataWeapon.speed);
                 timer = 0;
             }
         }
