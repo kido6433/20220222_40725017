@@ -10,6 +10,7 @@ namespace KIDO
       
         [SerializeField, Header("ªZ¾¹¸ê®Æ")]
         private Dataweapon dataWeapon;
+        public Dataweapon dataWeapon2;
 
         private float timer;
         private void OnDrawGizmos()
@@ -30,6 +31,17 @@ namespace KIDO
         private void Update()
         {
             SpawnWeapon();
+
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    GameObject tamp = Instantiate(dataWeapon2.goWeapon, (this.transform.position - new Vector3(1.5f, 2, 0)), this.transform.rotation);
+                } else
+                {
+                    GameObject tamp = Instantiate(dataWeapon2.goWeapon, (this.transform.position - new Vector3(-1.5f, 2, 0)), this.transform.rotation);
+                }
+            }
         }
 
         public void SpawnWeapon ()
